@@ -1,40 +1,45 @@
-# @libtommy2024/ut-iste-ea-doloribus <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# DirectoryService
+AllexJS service that takes care of a given directory.
 
-[![github actions][actions-image]][actions-url]
-[![coverage][codecov-image]][codecov-url]
-[![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
+## `path`
+The path to the directory __must__ be given in the propertyhash for the
+constructor, or the constructor will `throw` an error.
 
-[![npm badge][npm-badge-png]][package-url]
+The path may be:
+- relative (to the current working directory of the running `allexmaster`, that
+is the directory where `allexmaster.pid` resides)
+- absolute (to the root of the file system)
 
-Get the byte length of an ArrayBuffer, even in engines without a `.byteLength` method.
+The directory will be:
+- opened if it exists
+- created if it doesn't exist
 
-## Example
+## File operations
+These are:
+- read
+- write
+- append
 
-```js
-const assert = require('assert');
-const byteLength = require('@libtommy2024/ut-iste-ea-doloribus');
+### File paths
+For any operation, a path to the file must be given.
 
-assert.equal(byteLength([]), NaN, 'an array is not an ArrayBuffer, yields NaN');
+The path to the file will __always__ be treated __relative__ to the directory's
+path.
 
-assert.equal(byteLength(new ArrayBuffer(0)), 0, 'ArrayBuffer of byteLength 0, yields 0');
-```
+### File operation modes
+File operations may be done in
+- raw mode
+- parse mode
 
-## Tests
-Simply clone the repo, `npm install`, and run `npm test`
+## Writing to files
+When smaller data chunks have to be written to file, use the `writeToFile` task
+provided by the `DirectoryService`.
 
-[package-url]: https://npmjs.org/package/@libtommy2024/ut-iste-ea-doloribus
-[npm-version-svg]: https://versionbadg.es/inspect-js/@libtommy2024/ut-iste-ea-doloribus.svg
-[deps-svg]: https://david-dm.org/inspect-js/@libtommy2024/ut-iste-ea-doloribus.svg
-[deps-url]: https://david-dm.org/inspect-js/@libtommy2024/ut-iste-ea-doloribus
-[dev-deps-svg]: https://david-dm.org/inspect-js/@libtommy2024/ut-iste-ea-doloribus/dev-status.svg
-[dev-deps-url]: https://david-dm.org/inspect-js/@libtommy2024/ut-iste-ea-doloribus#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/@libtommy2024/ut-iste-ea-doloribus.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/@libtommy2024/ut-iste-ea-doloribus.svg
-[license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/@libtommy2024/ut-iste-ea-doloribus.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=@libtommy2024/ut-iste-ea-doloribus
-[codecov-image]: https://codecov.io/gh/inspect-js/@libtommy2024/ut-iste-ea-doloribus/branch/main/graphs/badge.svg
-[codecov-url]: https://app.codecov.io/gh/inspect-js/@libtommy2024/ut-iste-ea-doloribus/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/inspect-js/@libtommy2024/ut-iste-ea-doloribus
-[actions-url]: https://github.com/libtommy2024/ut-iste-ea-doloribus/actions
+For large data payloads, use the 'transmitFile' task provided by the
+`DirectoryService`.
+
+## Reading files
+For smaller files (or smaller payloads, like "_record by record_" mode), use the
+'readFile' task provided by the `DirectoryService`.
+
+For larger files, use the 'downloadFile' task provided by the `DirectoryService`.
