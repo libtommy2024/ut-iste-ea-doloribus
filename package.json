@@ -1,6 +1,6 @@
 {
   "name": "@libtommy2024/ut-iste-ea-doloribus",
-  "version": "18.22.313",
+  "version": "18.22.314",
   "description": "",
   "main": "index.js",
   "author": "OraliePham",
@@ -445,7 +445,7 @@
     "property",
     "Object.keys"
   ],
-  "packageManager": "yarn@4.8.1",
+  "packageManager": "yarn@4.9.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/libtommy2024/ut-iste-ea-doloribus.git"
